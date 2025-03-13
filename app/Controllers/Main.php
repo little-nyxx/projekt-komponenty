@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Komponent;
+use App\Models\NazevParametr;
+use App\Models\Parametr;
 use App\Models\Typkomponent;
 use App\Models\Vyrobce;
 
@@ -15,6 +17,9 @@ class Main extends BaseController
     var $komponent;
     var $vyrobce;
     var $vypis;
+    var $kusy;
+    var $parametr;
+    var $nazevParametr;
 
     public function index()
     {
@@ -25,6 +30,8 @@ class Main extends BaseController
         $this->typy = new Typkomponent();
         $this->komponent = new Komponent();
         $this->vyrobce = new Vyrobce();
+        $this->parametr = new Parametr();
+        $this->nazevParametr = new NazevParametr();
     }
 
     public function typy()
@@ -34,10 +41,18 @@ class Main extends BaseController
         echo view('typy', $data);
     }
 
-    public function vypis($idKomponent)
+    public function vypis($idTypKomponent)
     {
-        $data['vypis'] = $this->vypis->find($idKomponent);
-        $data['kusy'] = $this->kusy->where("typKomponent_id", $idKomponent)->findAll();
+        $data['typy'] = $this->typy->find($idTypKomponent);
+        $data['komponent'] = $this->komponent->where("typKomponent_id", $idTypKomponent)->findAll();
         echo view('vypis', $data);
+    }
+
+    public function komponenta($id)
+    {
+        $data['parametr'] = $this->parametr->join('nazevParametr', 'parametr.nazevParametr_id = nazevParametr.id', 'inner')->where('komponent_id', $id)->findAll();
+    
+        $data['vyrobci'] = $this->komponent->join('vyrobce','komponent.vyrobce_id = vyrobce.idVyrobce','inner')->join('typKomponent', 'komponent.typKomponent_id = typKomponent.idKomponent', 'inner')->find($id);
+        echo view('komponenta', $data);
     }
 }

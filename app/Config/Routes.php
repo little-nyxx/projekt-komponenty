@@ -7,3 +7,4 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Main::typy');
 $routes->get('vypis/(:num)', "Main::vypis/$1");
+$routes->get('komponenta/(:num)', 'Main::komponenta/$1');
