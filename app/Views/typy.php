@@ -6,22 +6,16 @@
     <div class="row">
     <?php 
     foreach($typy as $row){
-      
-      
         ?>
         
         <div class="card col-lg-4">
             
         <div class="card-body">
-            <h4> <?= anchor('vypis/'.$row->idKomponent, $row->typKomponent) ?> </h4>
+            <h4> <?= anchor('vypis/'.$row->url, $row->typKomponent) ?> </h4>
         </div>
         </div>
-        
-      
       <?php
         }
-
-      
      ?>  
     </div>    
 </div>  

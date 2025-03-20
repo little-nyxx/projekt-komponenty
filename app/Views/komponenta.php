@@ -9,7 +9,7 @@
     $table = new \CodeIgniter\View\Table();
     $table->setHeading('Název parametru', 'Hodnota');
     foreach ($parametr as $row) {
-        $table->addRow($parametr->nazev, $parametr->hodnota);
+        $table->addRow($row->nazev, $row->hodnota);
     }
     $template = array(
         'table_open'=> '<table class="table table-bordered">',

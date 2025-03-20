@@ -9,6 +9,7 @@ use App\Models\NazevParametr;
 use App\Models\Parametr;
 use App\Models\Typkomponent;
 use App\Models\Vyrobce;
+use Config\MyConfig;
 
 class Main extends BaseController
 {
@@ -20,6 +21,9 @@ class Main extends BaseController
     var $kusy;
     var $parametr;
     var $nazevParametr;
+    var $strankovani;
+    var $config;
+    var $idTypKomponent;
 
     public function index()
     {
@@ -32,6 +36,8 @@ class Main extends BaseController
         $this->vyrobce = new Vyrobce();
         $this->parametr = new Parametr();
         $this->nazevParametr = new NazevParametr();
+        $config = new MyConfig();
+        $this->strankovani = $config->strankovani;
     }
 
     public function typy()
@@ -41,10 +47,14 @@ class Main extends BaseController
         echo view('typy', $data);
     }
 
-    public function vypis($idTypKomponent)
+    public function vypis($urlTypKomponent)
     {
+        //$urlTypKomponent = $idTypKomponent;
+        $urlTypKomponent = $this->typy->where('url', $url);
+        
         $data['typy'] = $this->typy->find($idTypKomponent);
-        $data['komponent'] = $this->komponent->where("typKomponent_id", $idTypKomponent)->findAll();
+        $data['komponent'] = $this->komponent->where("typKomponent_id", $idTypKomponent)->paginate($this->strankovani);
+        $data['pager'] = $this->komponent->pager;
         echo view('vypis', $data);
     }
 

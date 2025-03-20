@@ -2,12 +2,11 @@
 
 <?= $this->section('content'); ?>
 <div class="container">
-    <h1>Přehled <?= $typy->typKomponent ?></h1>
+    <h1>Přehled </h1>
     <div class="row">
     <?php 
+    var_dump($komponent);
     foreach($komponent as $row){
-      
-      
         ?>
         
         <div class="card col-lg-4">
@@ -20,9 +19,11 @@
       
       <?php
         }
-
-      
      ?>  
-    </div>    
+    </div> 
+    <?php
+    echo $pager->links();
+    ?>   
 </div>  
+
 <?=$this->endSection(); ?>
