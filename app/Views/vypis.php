@@ -1,8 +1,16 @@
 <?= $this->extend('layout/sablona'); ?>
 
 <?= $this->section('content'); ?>
-<div class="container">
-    <h1>Přehled </h1>
+    <div class="container">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?=anchor("", "Typy") ?></li>
+        <li class="breadcrumb-item active" aria-current="page"><?= $typy->typKomponent ?></li>
+    </ol>
+    </nav>
+
+
+    <h1>Přehled <?= $typy->typKomponent ?></h1>
     <div class="row">
     <?php 
     foreach($komponent as $row){

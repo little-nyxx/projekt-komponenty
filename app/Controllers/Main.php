@@ -49,10 +49,8 @@ class Main extends BaseController
 
     public function vypis($urlTypKomponent)
     {
-        //$urlTypKomponent = $idTypKomponent;
         $url = $this->typy->where('url', $urlTypKomponent)->findAll();
         $url = $url[0]->idKomponent;
-       // var_dump($url);
         $data['typy'] = $this->typy->find($url);
 
         $data['komponent'] = $this->komponent->where("typKomponent_id", $url)->paginate($this->strankovani);
@@ -63,8 +61,22 @@ class Main extends BaseController
     public function komponenta($id)
     {
         $data['parametr'] = $this->parametr->join('nazevParametr', 'parametr.nazevParametr_id = nazevParametr.id', 'inner')->where('komponent_id', $id)->findAll();
-    
         $data['vyrobci'] = $this->komponent->join('vyrobce','komponent.vyrobce_id = vyrobce.idVyrobce','inner')->join('typKomponent', 'komponent.typKomponent_id = typKomponent.idKomponent', 'inner')->find($id);
         echo view('komponenta', $data);
+    }
+
+    public function taby()
+    {
+        $typy = $this->typy->findAll();
+        $data['typy'] = $typy;
+
+        //$url = $this->typy->where('url', $urlTypKomponent)->findAll();
+        //$url = $url[0]->idKomponent;
+        //$data['typy'] = $this->typy->find($url);
+       // $data['komponent'] = $this->komponent->where("typKomponent_id", $url)->paginate($this->strankovani);
+       // $data['pager'] = $this->komponent->pager;
+
+        echo view('taby', $data);
+
     }
 }

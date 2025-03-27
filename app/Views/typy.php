@@ -2,6 +2,13 @@
 
 <?= $this->section('content'); ?>
 <div class="container">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Typy</li>
+    </ol>
+    </nav>
+
+
     <h1>Přehled typů komponentů</h1>
     <div class="row">
     <?php 

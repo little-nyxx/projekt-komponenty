@@ -8,3 +8,4 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Main::typy');
 $routes->get('vypis/(:any)', "Main::vypis/$1");
 $routes->get('komponenta/(:num)', 'Main::komponenta/$1');
+$routes->get('taby/', 'Main::taby');

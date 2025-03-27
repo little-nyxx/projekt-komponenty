@@ -1,6 +1,13 @@
 <?= $this->extend('layout/sablona'); ?>
 
 <?= $this->section('content'); ?>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?=anchor("", "Typy") ?></li>
+        <li class="breadcrumb-item"><?=anchor("vypis/$vyrobci->url", $vyrobci->typKomponent)  ?></li>
+        <li class="breadcrumb-item active" aria-current="page"><?= $vyrobci->nazev ?></li>
+    </ol>
+    </nav>
 <h1><?= $vyrobci->nazev ?></h1>
 <h2><?= $vyrobci->typKomponent?></h2>
 <h3>Výrobce: <?= $vyrobci->vyrobce?></h3>
