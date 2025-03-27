@@ -50,10 +50,10 @@ class Main extends BaseController
     public function vypis($urlTypKomponent)
     {
         //$urlTypKomponent = $idTypKomponent;
-        $urlTypKomponent = $this->typy->where('url', $url);
-        
-        $data['typy'] = $this->typy->find($idTypKomponent);
-        $data['komponent'] = $this->komponent->where("typKomponent_id", $idTypKomponent)->paginate($this->strankovani);
+        $url = $this->typy->where('url', $urlTypKomponent)->findAll();
+       // var_dump($url);
+        $data['typy'] = $this->typy->find($url);
+        $data['komponent'] = $this->komponent->where("typKomponent_id", $url)->paginate($this->strankovani);
         $data['pager'] = $this->komponent->pager;
         echo view('vypis', $data);
     }
