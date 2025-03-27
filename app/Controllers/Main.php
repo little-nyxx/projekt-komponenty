@@ -51,8 +51,10 @@ class Main extends BaseController
     {
         //$urlTypKomponent = $idTypKomponent;
         $url = $this->typy->where('url', $urlTypKomponent)->findAll();
+        $url = $url[0]->idKomponent;
        // var_dump($url);
         $data['typy'] = $this->typy->find($url);
+
         $data['komponent'] = $this->komponent->where("typKomponent_id", $url)->paginate($this->strankovani);
         $data['pager'] = $this->komponent->pager;
         echo view('vypis', $data);

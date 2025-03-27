@@ -5,7 +5,6 @@
     <h1>Přehled </h1>
     <div class="row">
     <?php 
-    var_dump($komponent);
     foreach($komponent as $row){
         ?>
         
