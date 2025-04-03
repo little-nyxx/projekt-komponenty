@@ -10,6 +10,7 @@ use App\Models\Parametr;
 use App\Models\Typkomponent;
 use App\Models\Vyrobce;
 use Config\MyConfig;
+use App\Libraries\Filtr;
 
 class Main extends BaseController
 {
@@ -24,6 +25,7 @@ class Main extends BaseController
     var $strankovani;
     var $config;
     var $idTypKomponent;
+    var $filtr;
 
     public function index()
     {
@@ -36,6 +38,7 @@ class Main extends BaseController
         $this->vyrobce = new Vyrobce();
         $this->parametr = new Parametr();
         $this->nazevParametr = new NazevParametr();
+        $this->filtr = new Filtr();
         $config = new MyConfig();
         $this->strankovani = $config->strankovani;
     }
@@ -68,15 +71,18 @@ class Main extends BaseController
     public function taby()
     {
         $typy = $this->typy->findAll();
-        $data['typy'] = $typy;
+        $komponenta = $this->komponent->findAll();
+        $data['mensiTypy'] = $typy;
+        $data['typy'] = $this->filtr->tabFormater($typy, $komponenta);
 
+        //var_dump($data['typy']);
         //$url = $this->typy->where('url', $urlTypKomponent)->findAll();
         //$url = $url[0]->idKomponent;
         //$data['typy'] = $this->typy->find($url);
        // $data['komponent'] = $this->komponent->where("typKomponent_id", $url)->paginate($this->strankovani);
        // $data['pager'] = $this->komponent->pager;
 
-        echo view('taby', $data);
+       echo view('taby', $data);
 
     }
 }
