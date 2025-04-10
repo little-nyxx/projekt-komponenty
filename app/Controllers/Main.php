@@ -74,6 +74,7 @@ class Main extends BaseController
         $komponenta = $this->komponent->findAll();
         $data['mensiTypy'] = $typy;
         $data['typy'] = $this->filtr->tabFormater($typy, $komponenta);
+        $data['komponent'] = $komponenta;
 
         //var_dump($data['typy']);
         //$url = $this->typy->where('url', $urlTypKomponent)->findAll();
